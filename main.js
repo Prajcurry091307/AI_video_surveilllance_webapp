@@ -1,5 +1,6 @@
 video = "";
-
+status = "";
+objects =[];
 function preload()
     {
         video = createVideo('video.mp4');
@@ -13,7 +14,25 @@ function setup()
 }
 function draw()
 {
-    image(video,0,0,450,360);
+    image(video,0,0,480,380)
+    /*for (i=0; i<=10; i++)
+        {
+        console.log(i);
+        }*/
+
+        if(status !="")
+        {
+            objectDetector.detect(video, gotResult);
+            for (i=0; i<objects.length; i++)
+            {
+             document.getElementById("status").innerHTML = "Status : Objects Detected";
+             document.getElementById("number_of_objects").innerHTML = "Number of objects deteced are : " + objects.length;
+                 
+             fill("#FF0000");
+             percent = floor(objects[i].confidence*100);
+             Text(objects[i].label +" " + percebr +"%", objects[i].x+15, objects[i].y+15)
+            }
+        }
 }
 function start()
 {
@@ -27,4 +46,15 @@ function modelLoaded()
     video.loop()
     video.speed(2);
     video.volume(0);
+}
+
+function gotResult(error,results)
+{
+ if(error)
+ {
+     console.log(error);
+ }
+ console.log(results);
+
+ objects = results;
 }
