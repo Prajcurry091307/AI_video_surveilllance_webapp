@@ -30,7 +30,7 @@ function draw()
                  
              fill("#FF0000");
              percent = floor(objects[i].confidence*100);
-             Text(objects[i].label +" " + percebr +"%", objects[i].x+15, objects[i].y+15)
+             text(objects[i].label +" " + percent +"%", objects[i].x+15, objects[i].y+15)
             }
         }
 }
